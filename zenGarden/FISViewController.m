@@ -13,6 +13,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *swordInRock;
 @property (nonatomic, strong) IBOutlet UIImageView *rake;
 @property (nonatomic, strong) IBOutlet UIImageView *rock;
+@property (nonatomic, strong) UIImageView *selectedImageView;
 @property (nonatomic) CGPoint shrubLocation;
 @property (nonatomic) CGPoint swordInRockLocation;
 @property (nonatomic) CGPoint rakeLocation;
@@ -29,6 +30,24 @@
     [self.swordInRock addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDragged:)]];
     [self.rake addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDragged:)]];
     [self.rock addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDragged:)]];
+    
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDoubleTapped:)];
+    [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [self.shrub addGestureRecognizer:doubleTapGestureRecognizer];
+    
+    doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDoubleTapped:)];
+    [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [self.swordInRock addGestureRecognizer:doubleTapGestureRecognizer];
+    
+    doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDoubleTapped:)];
+    [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [self.rake addGestureRecognizer:doubleTapGestureRecognizer];
+    
+    doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewWasDoubleTapped:)];
+    [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [self.rock addGestureRecognizer:doubleTapGestureRecognizer];
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -111,6 +130,24 @@
 {
     [imageView setCenter:CGPointMake(fmaxf((float)imageView.center.x, (float)imageView.frame.size.width*0.5f), fmaxf((float)imageView.center.y, (float)imageView.frame.size.height*0.5f))];
     [imageView setCenter:CGPointMake(fminf((float)imageView.center.x, (float)(imageView.superview.bounds.size.width-imageView.frame.size.width*0.5f)), fminf((float)imageView.center.y, (float)(imageView.superview.bounds.size.height-imageView.frame.size.height*0.5f)))];
+}
+
+- (void)imageViewWasDoubleTapped:(UITapGestureRecognizer *)doubleTapGestureRecognizer
+{
+    UIImageView *imageView = (UIImageView *)doubleTapGestureRecognizer.view;
+    
+    [self setSelectedImageView:imageView];
+    [imageView setBackgroundColor:[UIColor yellowColor]];
+}
+
+- (void)viewWasTapped:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    if (!self.selectedImageView) return;
+    
+    [self.selectedImageView setCenter:[tapGestureRecognizer locationInView:self.selectedImageView.superview]];
+    [self ensureImageViewIsNotOffScreen:self.selectedImageView];
+    [self.selectedImageView setBackgroundColor:[UIColor clearColor]];
+    [self setSelectedImageView:nil];
 }
 
 @end
