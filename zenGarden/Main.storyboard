@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VUp-mn-ngv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,6 +16,36 @@
                     <view key="view" contentMode="scaleToFill" id="mnX-Df-JPG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" image="shrub.png" translatesAutoresizingMaskIntoConstraints="NO" id="HTf-WF-nVb">
+                                <rect key="frame" x="20" y="20" width="100" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HTf-WF-nVb" secondAttribute="height" multiplier="50:33" id="QAX-Md-O8d"/>
+                                    <constraint firstAttribute="width" constant="100" id="d7K-37-tmU"/>
+                                </constraints>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" image="rake.png" translatesAutoresizingMaskIntoConstraints="NO" id="yim-4R-6Sh">
+                                <rect key="frame" x="20" y="94" width="100" height="149"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="muA-PN-Wm7"/>
+                                    <constraint firstAttribute="width" secondItem="yim-4R-6Sh" secondAttribute="height" multiplier="134:199" id="wDn-UL-gZS"/>
+                                </constraints>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" image="rock1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oax-HZ-VtP">
+                                <rect key="frame" x="128" y="20" width="100" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Oax-HZ-VtP" secondAttribute="height" multiplier="33:26" id="3bG-EQ-Cmt"/>
+                                    <constraint firstAttribute="width" constant="100" id="cpe-N9-7BD"/>
+                                </constraints>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" image="swordinrock.png" translatesAutoresizingMaskIntoConstraints="NO" id="xdZ-0d-8h7">
+                                <rect key="frame" x="128" y="107" width="100" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xdZ-0d-8h7" secondAttribute="height" multiplier="83:100" id="Afd-kS-6oW"/>
+                                    <constraint firstAttribute="width" constant="100" id="jO8-uf-G2k"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -23,4 +54,10 @@
             <point key="canvasLocation" x="406" y="324"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="rake.png" width="402" height="597"/>
+        <image name="rock1.png" width="297" height="234"/>
+        <image name="shrub.png" width="600" height="396"/>
+        <image name="swordinrock.png" width="498" height="600"/>
+    </resources>
 </document>
