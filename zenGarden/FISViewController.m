@@ -8,7 +8,7 @@
 
 #import "FISViewController.h"
 
-@interface FISViewController ()
+@interface FISViewController () <UIAlertViewDelegate>
 @property (nonatomic, strong) IBOutlet UIImageView *shrub;
 @property (nonatomic, strong) IBOutlet UIImageView *swordInRock;
 @property (nonatomic, strong) IBOutlet UIImageView *rake;
@@ -78,10 +78,39 @@
     if ((panGestureRecognizer.state == UIGestureRecognizerStateEnded) || (panGestureRecognizer.state == UIGestureRecognizerStateCancelled) || (panGestureRecognizer.state == UIGestureRecognizerStateFailed))
     {
         [UIView animateWithDuration:0.18f animations:^{
-            [imageView setCenter:CGPointMake(fmaxf((float)imageView.center.x, (float)imageView.frame.size.width*0.5f), fmaxf((float)imageView.center.y, (float)imageView.frame.size.height*0.5f))];
-            [imageView setCenter:CGPointMake(fminf((float)imageView.center.x, (float)(imageView.superview.bounds.size.width-imageView.frame.size.width*0.5f)), fminf((float)imageView.center.y, (float)(imageView.superview.bounds.size.height-imageView.frame.size.height*0.5f)))];
+            [self ensureImageViewIsNotOffScreen:imageView];
+        } completion:^(BOOL finished) {
+            [self checkForWin];
         }];
     }
+}
+
+- (void)checkForWin
+{
+    if (self.swordInRock.center.x >= self.swordInRock.superview.bounds.size.width*0.5f) return;
+    
+    if (hypotf((float)(self.shrub.center.x-self.rake.center.x), (float)(self.shrub.center.y-self.rake.center.y)) > 100.0f) return;
+    
+    if (roundf((float)(self.rock.center.y/self.rock.superview.bounds.size.height)) == roundf((float)(self.swordInRock.center.y/self.swordInRock.superview.bounds.size.height))) return;
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You win!" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSArray *imageViews = @[self.shrub, self.swordInRock, self.rake, self.rock];
+    for (UIImageView *imageView in imageViews)
+    {
+        [imageView setCenter:CGPointMake(imageView.superview.bounds.size.width*arc4random_uniform(INT_MAX)/(INT_MAX-1), imageView.superview.bounds.size.height*arc4random_uniform(INT_MAX)/(INT_MAX-1))];
+        [self ensureImageViewIsNotOffScreen:imageView];
+    }
+}
+
+- (void)ensureImageViewIsNotOffScreen:(UIImageView *)imageView
+{
+    [imageView setCenter:CGPointMake(fmaxf((float)imageView.center.x, (float)imageView.frame.size.width*0.5f), fmaxf((float)imageView.center.y, (float)imageView.frame.size.height*0.5f))];
+    [imageView setCenter:CGPointMake(fminf((float)imageView.center.x, (float)(imageView.superview.bounds.size.width-imageView.frame.size.width*0.5f)), fminf((float)imageView.center.y, (float)(imageView.superview.bounds.size.height-imageView.frame.size.height*0.5f)))];
 }
 
 @end
