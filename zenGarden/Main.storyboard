@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="puD-hO-rPa">
             <objects>
-                <viewController id="VUp-mn-ngv" sceneMemberID="viewController">
+                <viewController id="VUp-mn-ngv" customClass="FISViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9LB-0U-FlI"/>
                         <viewControllerLayoutGuide type="bottom" id="CYU-if-o3L"/>
@@ -48,6 +48,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="rake" destination="yim-4R-6Sh" id="gsl-ca-Xzv"/>
+                        <outlet property="rock" destination="Oax-HZ-VtP" id="3gC-WS-MnQ"/>
+                        <outlet property="shrub" destination="HTf-WF-nVb" id="pME-8J-cV6"/>
+                        <outlet property="swordInRock" destination="xdZ-0d-8h7" id="Jk4-JP-u8n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dew-q1-1A8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
